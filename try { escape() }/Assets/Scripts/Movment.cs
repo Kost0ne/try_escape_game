@@ -8,14 +8,18 @@ public class Movment : MonoBehaviour
     private Vector3 targetPosition;
     private bool isMoving;
     private float speed;
-    private bool isFacingRight;
-
+    public static bool IsFacingRight { get; set; }
+    
+    
+    
     public void Awake()
     {
         isMoving = false;
         speed = 3.0f;
-        isFacingRight = false;
+        IsFacingRight = false;
     }
+    
+    
     
     void Update()
     {
@@ -35,8 +39,8 @@ public class Movment : MonoBehaviour
 
     private void Move()
     {
-        if (targetPosition.x < transform.position.x && isFacingRight) Flip();
-        else if (targetPosition.x > transform.position.x && !isFacingRight) Flip();
+        if (targetPosition.x < transform.position.x && IsFacingRight) Flip();
+        else if (targetPosition.x > transform.position.x && !IsFacingRight) Flip();
         
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         if(transform.position == targetPosition)
@@ -45,7 +49,7 @@ public class Movment : MonoBehaviour
     
     private void Flip()
     {
-        isFacingRight = !isFacingRight;
+        IsFacingRight = !IsFacingRight;
         var playerScale = transform.localScale;
         playerScale.x *= -1;
         transform.localScale = playerScale;
