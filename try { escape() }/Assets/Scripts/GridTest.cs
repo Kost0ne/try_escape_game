@@ -10,7 +10,7 @@ public class GridTest : MonoBehaviour
     public float cellSize;
     public Vector3 position;
     public GameObject wire;
-    
+
     void Start()
     {
         grid = new Grid(width, height, cellSize, position);
@@ -26,7 +26,8 @@ public class GridTest : MonoBehaviour
         {
             if (grid.IsEmpty(x, y))
             {
-                var clone = Instantiate(wire, grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2, cellSize / 2),
+                var clone = Instantiate(wire, 
+                    grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2, cellSize / 2),
                     Quaternion.identity);
                 grid.SetValue(position, clone);
             }
