@@ -57,21 +57,6 @@ public class Grid : MonoBehaviour
             return GetValue(x, y);
         }
 
-        public bool AreThereAnyNeighbors(int x, int y, string colorName)
-        {
-            for (var dy = -1; dy <= 1; dy++)
-            for (var dx = -1; dx <= 1; dx++)
-            {
-                if (dx != 0 && dy != 0) continue;
-                if (x + dx < 0 || y + dy < 0 || x + dx >= width || y + dy >= height) continue;
-                if (grid[x + dx, y + dy] == null) continue;
-                if (grid[x + dx, y + dy].name != colorName) continue;
-                return true;
-            }
-            
-            return false;
-        }
-
         public void VisualizeGrid()
         {
             for(var x = 0; x < grid.GetLength(0); x++)

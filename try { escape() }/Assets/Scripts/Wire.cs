@@ -4,7 +4,7 @@ using UnityEngine;
 public class Node
 {
     public (int, int) position;
-    public GameObject prefab;
+    private GameObject prefab;
 
     public Node((int, int) position, GameObject prefab)
     {
@@ -16,6 +16,8 @@ public class Node
 public class Wire
 {
     private (int, int) last;
+    private (int, int) start;
+    private (int, int) finish;
     private Stack<Node> stack;
     private GameObject prefab;
 
@@ -23,6 +25,7 @@ public class Wire
     {
         last = start;
         this.prefab = prefab;
+        this.start = start;
         stack = new Stack<Node>();
     }
     public void Add(int x, int y)
@@ -34,7 +37,25 @@ public class Wire
     public void Remove()
     {
         stack.Pop();
-        last = stack.Peek().position;
+        last = stack.Count != 0
+            ? stack.Peek().position
+            : start;
+    }
+
+    public bool CanAdd(int x, int y)
+    {
+        for (var dy = -1; dy <= 1; dy++)
+        for (var dx = -1; dx <= 1; dx++)
+        {
+            if (dx != 0 && dy != 0) continue;
+            if (last == (x + dx, y + dy)) return true;
+        }
+        return false;
+    }
+    
+    public bool CanRemove(int x, int y)
+    {
+        return (x, y) == last;
     }
 
 }

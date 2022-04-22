@@ -10,7 +10,7 @@ public class WireGame : MonoBehaviour
     [SerializeField] private int height;
     [SerializeField] private float cellSize;
     [SerializeField] private Vector3 position;
-    private Dictionary<string, Stack<GameObject>> wires;
+    private Dictionary<string, Wire> wires;
     private GameObject color;
     private Grid grid;
 
@@ -24,12 +24,14 @@ public class WireGame : MonoBehaviour
                 var clone = GetClone(x, y, level[x, y]);
                 clone.transform.SetParent(gameObject.transform, false);
                 grid.SetValue(x, y, level[x, y]);
+                if (!wires.ContainsKey(level[x, y].name))
+                    wires.Add(level[x, y].name, new Wire((x, y), level[x, y]));
             }
         }
     }
     void Start()
     {
-        wires = Levels.Colors.ToDictionary(k => k.name, v =>new Stack<GameObject>());
+        wires = new Dictionary<string, Wire>();
         grid = new Grid(width, height, cellSize, position);
         grid.VisualizeGrid();
         SetUpLevel(Levels.level1);
@@ -41,21 +43,20 @@ public class WireGame : MonoBehaviour
         var (x, y) = grid.GetXY(position);
         if (Input.GetMouseButton(0))
         {
-            Debug.Log($"X: {x} Y: {y}");
-            if (color != null && grid.IsEmpty(x, y) && grid.AreThereAnyNeighbors(x, y, color.name))
+            if (color != null && grid.IsEmpty(x, y) && wires[color.name].CanAdd(x, y))
             {
                 var clone = GetClone(x, y, color);
                 grid.SetValue(position, clone);
-                wires[color.name].Push(clone);
+                wires[color.name].Add(x, y);
             }
             color = grid.GetValue(position);
         }
         if (Input.GetMouseButton(1))
         {
             color = grid.GetValue(position);
-            if (wires[color.name].Peek() != grid.GetValue(x, y)) return;
+            if (!wires[color.name].CanRemove(x, y)) return;
             grid.Delete(x, y);
-            wires[color.name].Pop();
+            wires[color.name].Remove();
         }
     }
 
