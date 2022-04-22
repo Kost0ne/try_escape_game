@@ -20,7 +20,9 @@ public class Wire
     private (int, int) finish;
     private Stack<Node> stack;
     private GameObject prefab;
-
+    
+    public (int, int) Finish => finish;
+    
     public Wire((int, int) start, GameObject prefab)
     {
         last = start;
@@ -30,6 +32,7 @@ public class Wire
     }
     public void Add(int x, int y)
     {
+        if ((x, y) == finish) return;
         last = (x, y);
         stack.Push(new Node(last, prefab));
     }
@@ -57,5 +60,12 @@ public class Wire
     {
         return (x, y) == last;
     }
+
+    public void AddFinish(int x, int y)
+    {
+        finish = (x, y);
+    }
+    
+    public bool IsConnected() => last == finish;
 
 }

@@ -26,6 +26,10 @@ public class WireGame : MonoBehaviour
                 grid.SetValue(x, y, level[x, y]);
                 if (!wires.ContainsKey(level[x, y].name))
                     wires.Add(level[x, y].name, new Wire((x, y), level[x, y]));
+                else
+                {
+                    wires[level[x, y].name].AddFinish(x, y);
+                }
             }
         }
     }
@@ -39,11 +43,14 @@ public class WireGame : MonoBehaviour
     
     void Update()
     {
+        if (IsWin()) Debug.Log("Victory!");
         var position = GetWorldPosition();
         var (x, y) = grid.GetXY(position);
         if (Input.GetMouseButton(0))
         {
-            if (color != null && grid.IsEmpty(x, y) && wires[color.name].CanAdd(x, y))
+            if (color != null && (x, y) == wires[color.name].Finish)
+                wires[color.name].Add(x, y);
+            if (color != null && wires[color.name].CanAdd(x, y) && grid.IsEmpty(x, y))
             {
                 var clone = GetClone(x, y, color);
                 grid.SetValue(position, clone);
@@ -71,4 +78,14 @@ public class WireGame : MonoBehaviour
     }
 
     private Vector3 GetWorldPosition() => Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+    private bool IsWin()
+    {
+        foreach (var wire in wires.Values)
+        {
+            if (!wire.IsConnected())
+                return false;
+        }
+        return true;
+    }
 }
