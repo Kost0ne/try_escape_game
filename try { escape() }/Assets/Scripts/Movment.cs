@@ -9,20 +9,22 @@ public class Movment : MonoBehaviour
     private bool isMoving;
     private float speed;
     public static bool IsFacingRight { get; set; }
-    
-    
+    private Animator animator;
     
     public void Awake()
     {
         isMoving = false;
-        speed = 3.0f;
+        speed = 1.15f;
         IsFacingRight = false;
+        animator = GetComponent<Animator>();
+        animator.speed = 0.83f;
     }
     
     
     
     void Update()
     {
+        
         if(Input.GetMouseButton(0)) 
             SetTargetPosition();
         if (isMoving) 
@@ -43,8 +45,19 @@ public class Movment : MonoBehaviour
         else if (targetPosition.x > transform.position.x && !IsFacingRight) Flip();
         
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        if(transform.position == targetPosition)
+        if (transform.position == targetPosition)
+        {
+            
             isMoving = false;
+            animator.SetBool("IsMoving", false);
+            
+        }
+        else
+        {
+            animator.SetBool("IsMoving", true);
+
+        }
+            
     }
     
     private void Flip()
