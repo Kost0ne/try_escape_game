@@ -5,22 +5,22 @@ public class Levels : MonoBehaviour
 {
     [SerializeField] private GameObject green;
     [SerializeField] private GameObject blue;
-    [SerializeField] private GameObject orange;
+    [SerializeField] private GameObject yellow;
     [SerializeField] private GameObject purple;
-    [SerializeField] private GameObject red;
+    [SerializeField] private GameObject azure;
 
     public static GameObject[,] level1;
     public static List<GameObject> Colors;
 
-    void Start()
+    void Awake()
     {
-        Colors = new List<GameObject> {green, blue, orange, purple, red};
+        Colors = new List<GameObject> {green, blue, yellow, purple, azure};
         level1 = new[,]{
             {green, null, null, null, purple},
-            {null, null, orange, null, null},
+            {null, null, yellow, null, null},
             {green, null, null, purple, null},
-            {blue, null, null, blue, orange},
-            {red, null, null, null, red}
+            {blue, null, null, blue, yellow},
+            {azure, null, null, null, azure}
         };
     }
 }
