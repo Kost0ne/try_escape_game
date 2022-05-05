@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Node
 {
     public (int, int) position;
-    private GameObject prefab;
+    private ColorNode prefab;
 
-    public Node((int, int) position, GameObject prefab)
+    public Node((int, int) position, ColorNode prefab)
     {
         this.position = position;
         this.prefab = prefab;
@@ -19,11 +20,11 @@ public class Wire
     private (int, int) start;
     private (int, int) finish;
     private Stack<Node> stack;
-    private GameObject prefab;
+    private ColorNode prefab;
     
     public (int, int) Finish => finish;
     
-    public Wire((int, int) start, GameObject prefab)
+    public Wire((int, int) start, ColorNode prefab)
     {
         last = start;
         this.prefab = prefab;
@@ -67,5 +68,19 @@ public class Wire
     }
     
     public bool IsConnected() => last == finish;
+
+    public Direction GetDirection(int x, int y)
+    {
+        var (lastX, lastY) = last;
+        if ((x, y) == (lastX + 1, lastY))
+            return Direction.Right;
+        if ((x, y) == (lastX - 1, lastY))
+            return Direction.Left;
+        if ((x, y) == (lastX, lastY + 1))
+            return Direction.Up;
+        if ((x, y) == (lastX, lastY - 1))
+            return Direction.Down;
+        throw new InvalidOperationException();
+    }
 
 }

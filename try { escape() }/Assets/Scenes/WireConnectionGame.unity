@@ -196,11 +196,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99b82f02f09e7549890bb32a05f7480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  green: {fileID: 3913230979117142359, guid: a0092aa2949a15347b2a7617515ed7c4, type: 3}
-  blue: {fileID: 320263967802750531, guid: 566a8313ab1208f42a995964ba71534e, type: 3}
-  yellow: {fileID: 8599346910019302892, guid: 30cdb609ce5a81049b7a300c0c4efc46, type: 3}
-  purple: {fileID: 3750761461866618192, guid: 6b88b24d112aa9948aa5d409916da9e2, type: 3}
-  azure: {fileID: 8807031161170478184, guid: d4b7ea7d562ae4e4c83130744027beef, type: 3}
+  colors:
+  - azure
+  - blue
+  - green
+  - purple
+  - yellow
 --- !u!1 &1000144108
 GameObject:
   m_ObjectHideFlags: 0
