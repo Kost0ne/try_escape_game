@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"m_AlwaysRefresh":false,"showFog":true,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":true,"pivot":{"x":-2.7802319526672365,"y":-1.2177131175994874,"z":-2.1301910877227785},"rotation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},"size":19.263381958007814,"orthographic":true}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":false,"audioPlay":false,"sceneViewState":{"m_AlwaysRefresh":false,"showFog":true,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":true,"pivot":{"x":1.5923136472702027,"y":0.13696721196174622,"z":-17.595073699951173},"rotation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},"size":5.760065078735352,"orthographic":true}
+>>>>>>> WireConnectGame

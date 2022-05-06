@@ -5,16 +5,26 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
+<<<<<<< HEAD
       ticks: 637873452379377318
     m_Hash: 1905465355
+=======
+      ticks: 637873323892903659
+    m_Hash: 1082240786
+>>>>>>> WireConnectGame
   m_LockFileStatus:
     m_FilePath: D:/try_escape_game/try { escape() }/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
+<<<<<<< HEAD
       ticks: 637873452379377318
     m_Hash: 2189448342
+=======
+      ticks: 637873323892903659
+    m_Hash: 407264249
+>>>>>>> WireConnectGame
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -3832,6 +3842,84 @@ m_PackageAssets:
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ext.nunit.git
         revision: 29ea4d6504a5f58fb3a6934db839aa80ae6d9d88
         path: 
+<<<<<<< HEAD
+=======
+    - packageId: com.unity.services.core@1.0.1
+      testable: 0
+      isDirectDependency: 0
+      version: 1.0.1
+      source: 1
+      resolvedPath: D:\repos\try_escape_game\try { escape() }\Library\PackageCache\com.unity.services.core@1.0.1
+      assetPath: Packages/com.unity.services.core
+      name: com.unity.services.core
+      displayName: Services Core
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: 'This package defines common components used by multiple Game
+        Service packages.
+
+        These are standardized and aim to unify the overall
+        experience of working with Game Services packages.'
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 1.0.1
+        - 1.1.0-pre.7
+        - 1.1.0-pre.8
+        - 1.1.0-pre.9
+        - 1.1.0-pre.10
+        - 1.1.0-pre.11
+        - 1.1.0-pre.41
+        - 1.1.0-pre.69
+        - 1.2.0
+        - 1.3.1
+        - 1.3.2
+        compatible:
+        - 1.0.1
+        - 1.1.0-pre.7
+        - 1.1.0-pre.8
+        - 1.1.0-pre.9
+        - 1.1.0-pre.10
+        - 1.1.0-pre.11
+        - 1.1.0-pre.41
+        - 1.1.0-pre.69
+        - 1.2.0
+        - 1.3.1
+        - 1.3.2
+        verified: 1.0.1
+      dependencies:
+      - name: com.unity.modules.unitywebrequest
+        version: 1.0.0
+      resolvedDependencies:
+      - name: com.unity.modules.unitywebrequest
+        version: 1.0.0
+      keywords: []
+      registry:
+        id: main
+        name: 
+        url: https://packages.unity.com
+        scopes: []
+        isDefault: 1
+        capabilities: 7
+      hasRegistry: 1
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637604883250000000
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: https://github.cds.internal.unity3d.com/unity/operate-services-sdk.git
+        revision: 4cd880d4fd5c60597629249bf4f324e4c8d7aa2e
+        path: 
+>>>>>>> WireConnectGame
     - packageId: com.unity.mathematics@1.1.0
       testable: 0
       isDirectDependency: 0
