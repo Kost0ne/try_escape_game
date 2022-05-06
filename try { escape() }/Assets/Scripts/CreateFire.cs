@@ -138,7 +138,7 @@ namespace DefaultNamespace
                 activeFire = new List<GameObject>();
                 block.GetComponent<SpriteRenderer>().material = urpMaterial;
 
-                for (var dx = -4; dx <= 4; dx ++)
+                for (var dx = -4f; dx <= 4f; dx+=0.5f)
                 {
                     if (rnd.Next(101) % 2 == 1) continue;
                     var obj = Instantiate(fire, firingBlockPos + new Vector3(dx, -0.8f, 0),
@@ -165,8 +165,8 @@ namespace DefaultNamespace
                     if (fireLightIntensivity > 0)
                     {
                         foreach (var fire in activeFire)
-                            fire.transform.Find("Point Light 2D").GetComponent<Light2D>().intensity -= 0.005f;
-                        fireLightIntensivity -= 0.005f;
+                            fire.transform.Find("Point Light 2D").GetComponent<Light2D>().intensity -= 0.002f;
+                        fireLightIntensivity -= 0.002f;
                     }
 
                     if (activatingFireSystem)
