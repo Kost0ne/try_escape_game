@@ -12,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - LayerForFireSystem
+  - 
   - 
   - 
   - 
@@ -39,15 +39,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Invisible
-    uniqueID: 2336158565
-    locked: 0
-  - name: BackGround
-    uniqueID: 2480255189
-    locked: 1
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: ForeGround
-    uniqueID: 3541729813
     locked: 0

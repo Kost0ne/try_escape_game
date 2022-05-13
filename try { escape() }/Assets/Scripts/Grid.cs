@@ -9,8 +9,8 @@ public class Grid : MonoBehaviour
         private readonly int height;
         private readonly float cellSize;
         private readonly Vector3 position;
-        private readonly GameObject[,] grid;
-        
+        private GameObject[,] grid;
+
         public Grid(int width, int height, float cellSize, Vector3 position)
         {
             this.width = width;
@@ -19,7 +19,7 @@ public class Grid : MonoBehaviour
             this.position = position;
             grid = new GameObject[width, height];
         }
-
+        
         public bool IsEmpty(int x, int y) => grid[x, y] == null;
 
         public void Delete(int x, int y)
@@ -37,10 +37,10 @@ public class Grid : MonoBehaviour
             return (x, y);
         }
 
-        private void SetValue(int x, int y, GameObject value)
+        public void SetValue(int x, int y, GameObject value)
         {
-            if (x >= 0 && y >= 0 && x < width && y < height)
-                grid[x, y] = value;
+            if (x < 0 || y < 0 || x >= width || y >= height) return;
+            grid[x, y] = value;
         }
 
         public void SetValue(Vector3 worldPosition, GameObject value)
@@ -49,7 +49,7 @@ public class Grid : MonoBehaviour
             SetValue(x, y, value);
         }
         
-        private GameObject GetValue(int x, int y) => grid[x, y];
+        public GameObject GetValue(int x, int y) => grid[x, y];
 
         public GameObject GetValue(Vector3 worldPosition)
         {
