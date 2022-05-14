@@ -33,7 +33,9 @@ public class Movment : MonoBehaviour
 
     void SetTargetPosition()
     {
-        targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var tempTargetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (tempTargetPosition.y > 0.2f) return;
+        targetPosition = tempTargetPosition;
         targetPosition.y = transform.position.y;
         targetPosition.z = transform.position.z;
         isMoving = true;
