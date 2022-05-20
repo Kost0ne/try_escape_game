@@ -16,7 +16,10 @@ public class TriggerReaction : MonoBehaviour
     {
         {"GeneratorTrigger", "О госпади, это же генератор!!!"},
         {"BoardTrigger", "Это же доска!!!"},
-        {"CapsuleTrigger", "Здесь кто-то был...."}
+        {"StepaTrigger", "О, и Стёпа здесь"},
+        {"KostyaTrigger", "?????"},
+        {"LiftTrigger", "О, лифт! Какое счастье"},
+        
     };
     
 

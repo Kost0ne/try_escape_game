@@ -6,78 +6,84 @@ using UnityEngine.EventSystems;
 
 public class DragAndDrop : MonoBehaviour
 {
-    private bool dragging;
-    private float EPS = 0.01f;
     private Rigidbody2D rigidBody;
-    private bool onPosition;
     private Vector2 lastNotNullVelocity;
-    private Vector2 objectPos;
+    private TargetJoint2D targetJoint;
+    private int[] Layers;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        Layers = new[]
+        {
+            LayerMask.GetMask("Default"),
+            LayerMask.GetMask("BackCollision"),
+            LayerMask.GetMask("2BackCollision")
+        };
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        // var t = Vector2.up;
-        // var u = transform.TransformPoint(new Vector2(0, 0));
-        // print(u.x.ToString() + " " + u.y.ToString() + " " + u.z.ToString());
-        // rigidBody.AddForceAtPosition(t * 3, u);
-        //rigidBody.AddForce(Vector2.up);
-        CheckClick();
-        var mousePos = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var position = (Vector2) transform.TransformPoint(objectPos);
-        if (dragging && !onPosition)
+        if (CheckClick(out var mousePos))
         {
-            var dir = mousePos - position;
-            lastNotNullVelocity = dir.normalized * Vector2.Distance(mousePos, position) * 25;
-            
-            var t = dir.normalized * Mathf.Pow(Vector2.Distance(mousePos, position) * 0.1f, 1);
-            //rigidBody.AddForceAtPosition(t, position, ForceMode2D.Impulse);
-            rigidBody.velocity = lastNotNullVelocity;
-            
-            
+            //var objectPos = transform.InverseTransformPoint(mousePos);
+            targetJoint = gameObject.AddComponent<TargetJoint2D>();
+            targetJoint.dampingRatio = 1.0f;
+            targetJoint.frequency = 5.0f;
+            var t = targetJoint.transform.InverseTransformPoint(mousePos);
+            print(t);
+            targetJoint.anchor = t;
         }
-        
-        if (Vector2.Distance(mousePos, position) < EPS)
+
+        if (targetJoint)
         {
-            onPosition = true;
-            rigidBody.velocity = Vector2.zero;
+            targetJoint.target = mousePos;
+            Debug.DrawLine(targetJoint.transform.TransformPoint(targetJoint.anchor), mousePos);
         }
-        else
+
+        if (transform.position.y < -20)
         {
-            onPosition = false;
+            Destroy(gameObject);
         }
     }
 
 
-    private void CheckClick()
+    private bool CheckClick(out Vector2 mousePos)
     {
-        if (Input.GetMouseButtonUp(0) && dragging)
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetMouseButtonUp(0))
         {
-            rigidBody.gravityScale = 1;
-            rigidBody.velocity = lastNotNullVelocity;
-            dragging = false;
+            Destroy(targetJoint);
+            targetJoint = null;
+            return false;
         }
+
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        contactFilter.useDepth = true;
+
 
         if (Input.GetMouseButtonDown(0))
         {
-            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var hit = Physics2D.Raycast(mousePos, Vector2.zero);
-            if (hit.collider == null) return;
+            // var hit = Physics2D.Raycast(mousePos, Vector2.zero);
+            //
+            //
+            // if (hit.collider == null) return false;
+            //
+            // if (hit.collider.gameObject == gameObject)
+            // {
+            //     return true;
+            // }
 
-            if (hit.collider.gameObject == gameObject)
+            foreach (var layer in Layers)
             {
-                //rigidBody.gravityScale = 0;
-                dragging = true;
-                objectPos = transform.InverseTransformPoint(mousePos);
-                return ;
+                var collider = Physics2D.OverlapPoint(mousePos, layer);
+                if (collider != null && collider.attachedRigidbody.gameObject == gameObject) return true;
             }
         }
+
+        return false;
     }
 }
