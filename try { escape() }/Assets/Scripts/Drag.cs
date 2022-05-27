@@ -20,7 +20,8 @@ public class Drag : MonoBehaviour
         {
             LayerMask.GetMask("Default"),
             LayerMask.GetMask("BackCollision"),
-            LayerMask.GetMask("2BackCollision")
+            LayerMask.GetMask("2BackCollision"),
+            LayerMask.GetMask("Card")
         };
     }
 
