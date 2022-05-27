@@ -10,7 +10,8 @@ public class Movment : MonoBehaviour
     private float speed;
     public static bool IsFacingRight { get; set; }
     private Animator animator;
-    
+    AudioManager audioManager;
+
     public void Awake()
     {
         isMoving = false;
@@ -19,16 +20,15 @@ public class Movment : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.speed = 0.83f;
     }
-    
-    
-    
+
     void Update()
     {
-        
-        if(Input.GetMouseButton(0)) 
+        if(Input.GetMouseButton(0) && !PauseMenu.GameIsPaused) 
             SetTargetPosition();
-        if (isMoving) 
+        
+        if (isMoving)
             Move();
+        
     }
 
     void SetTargetPosition()
@@ -59,7 +59,7 @@ public class Movment : MonoBehaviour
             animator.SetBool("IsMoving", true);
 
         }
-            
+        
     }
     
     private void Flip()
