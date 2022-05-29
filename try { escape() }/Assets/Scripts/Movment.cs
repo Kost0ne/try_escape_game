@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Movment : MonoBehaviour
@@ -11,8 +12,9 @@ public class Movment : MonoBehaviour
     public static bool IsFacingRight { get; set; }
     private Animator animator;
     AudioManager audioManager;
+    public GameObject[] objectsNotToFlip;
 
-    public void Awake()
+    public void Start()
     {
         isMoving = false;
         speed = 1.15f;
@@ -67,6 +69,13 @@ public class Movment : MonoBehaviour
         IsFacingRight = !IsFacingRight;
         var playerScale = transform.localScale;
         playerScale.x *= -1;
+
+        foreach (var obj in objectsNotToFlip)
+        {
+            var objScale = obj.transform.localScale;
+            objScale.x *= -1;
+            obj.transform.localScale = objScale;
+        }
         transform.localScale = playerScale;
     }
 }

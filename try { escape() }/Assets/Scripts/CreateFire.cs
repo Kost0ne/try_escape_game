@@ -103,7 +103,6 @@ namespace DefaultNamespace
 
         private class BlockState
         {
-            
             public bool isActive;
             private GameObject block, fire;
             private ParticleSystem fireSystem;
@@ -138,13 +137,21 @@ namespace DefaultNamespace
                 activeFire = new List<GameObject>();
                 block.GetComponent<SpriteRenderer>().material = urpMaterial;
 
-                for (var dx = -4f; dx <= 4f; dx+=0.5f)
+                var fireCount = 0;
+
+                while (fireCount < 10)
                 {
-                    if (rnd.Next(101) % 2 == 1) continue;
-                    var obj = Instantiate(fire, firingBlockPos + new Vector3(dx, -0.8f, 0),
-                        block.transform.rotation);
-                    activeFire.Add(obj);
+                    for (var dx = -4f; dx <= 4f; dx += 0.5f)
+                    {
+                        if (rnd.Next(101) % 2 == 1) continue;
+                        var obj = Instantiate(fire, firingBlockPos + new Vector3(dx, -0.8f, 0),
+                            block.transform.rotation);
+                        obj.transform.Find("Point Light 2D").GetComponent<Light2D>().intensity = 0.1f;
+                        activeFire.Add(obj);
+                        fireCount++;
+                    }
                 }
+
 
                 block.GetComponent<SpriteRenderer>().material = urpMaterial;
                 isActive = true;
@@ -162,11 +169,14 @@ namespace DefaultNamespace
             {
                 if (onDestroying)
                 {
-                    if (fireLightIntensivity > 0)
+                    if (fireLightIntensivity > 0.4)
                     {
+                        var lightIntensivityDelta = 1 / 150f;
+                        fireLightIntensivity -= lightIntensivityDelta;
+
                         foreach (var fire in activeFire)
-                            fire.transform.Find("Point Light 2D").GetComponent<Light2D>().intensity -= 0.002f;
-                        fireLightIntensivity -= 0.002f;
+                            fire.transform.Find("Point Light 2D").GetComponent<Light2D>().intensity =
+                                fireLightIntensivity;
                     }
 
                     if (activatingFireSystem)
@@ -196,9 +206,9 @@ namespace DefaultNamespace
 
                 if (fireLightIntensivity < 3)
                 {
-                    foreach (var fire in activeFire)
-                        fire.transform.Find("Point Light 2D").GetComponent<Light2D>().intensity += 0.01f;
                     fireLightIntensivity += 0.01f;
+                    foreach (var fire in activeFire)
+                        fire.transform.Find("Point Light 2D").GetComponent<Light2D>().intensity = fireLightIntensivity;
                 }
 
 
