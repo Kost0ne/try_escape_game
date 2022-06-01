@@ -13,12 +13,17 @@ public class MainMenu : MonoBehaviour
    private string pressButtonSound = "ButtonPress";
    
    AudioManager audioManager;
+   GameMaster gameMaster;
 
    private void Start()
    {
       audioManager = AudioManager.instance;
       if (audioManager == null)
          Debug.LogError("No audiomanager");
+      
+      gameMaster = GameMaster.instance;
+      if (gameMaster == null)
+         Debug.LogError("No GameMaster");
    }
 
    public void StartGame()
@@ -26,6 +31,34 @@ public class MainMenu : MonoBehaviour
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
    }
 
+   public void Continue()
+   {
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+      gameMaster.LoadGame();
+      // asyncLoad.
+      // while (!asyncLoad.isDone) continue;
+      // LoadYourAsyncScene(SceneManager.GetActiveScene().buildIndex + 1);
+   }
+   
+   // private IEnumerator LoadYourAsyncScene(int sceneIndex) 
+   // {
+   //    var asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
+   //
+   //    while (!asyncLoad.isDone)
+   //       yield return null;
+   //    
+   //    gameMaster.LoadGame();
+   //    Debug.Log("Load");
+   //    yield return null;
+   // }
+
+
+   // private IEnumerator LoadGame()
+   // {
+   //    yield return new WaitForEndOfFrame();
+   //    gameMaster.LoadGame();
+   // }
+   
    public void ExitGame()
    {
       Debug.Log("Exit");

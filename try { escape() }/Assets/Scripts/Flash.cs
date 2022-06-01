@@ -16,7 +16,7 @@ public class LightSource
     public float NoiseSpeed = 0.15f;
     
     private Light2D source;
-    
+
     public void SetSource()
     {
         source = gameObject.GetComponent<Light2D>();
@@ -41,7 +41,7 @@ public class Flash : MonoBehaviour
     [SerializeField]
     LightSource[] lightSources;
 
-    public bool FlickerON;
+    public static bool FlickerON;
     
     public bool RandomTimer;
     public float RandomTimerMIN = 5f;
@@ -50,9 +50,16 @@ public class Flash : MonoBehaviour
     
     public float StartTimerValue = 0.1f;
     
+    AudioManager audioManager;
+    [SerializeField]
+    private string flashSound = "FlashSound";
     
     IEnumerator Start()
     {
+        audioManager = AudioManager.instance;
+        if (audioManager == null)
+            Debug.LogError("No audiomanager");
+        
         foreach (var lightSource in lightSources)
             lightSource.SetSource();
         yield return new WaitForSeconds(StartTimerValue);
@@ -61,7 +68,16 @@ public class Flash : MonoBehaviour
         {
             RandomTimerValue = Random.Range(RandomTimerMIN, RandomTimerMAX);
             yield return new WaitForSeconds(RandomTimerValue);
-            FlickerON = !FlickerON;
+            if (FlickerON)
+            {
+                audioManager.StopSound(flashSound);
+                FlickerON = false;
+            }
+            else
+            {
+                audioManager.PlaySound(flashSound);
+                FlickerON = true;
+            }
         }
     } 
     

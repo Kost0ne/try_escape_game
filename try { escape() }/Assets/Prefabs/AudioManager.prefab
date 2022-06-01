@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f2f61456b43c0478f3230b5ee0d158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mixer: {fileID: 0}
   sounds:
   - name: Music
     clip: {fileID: 8300000, guid: 2af998622ee63a2458536fcd63537abf, type: 3}
@@ -67,8 +68,36 @@ MonoBehaviour:
     loop: 0
   - name: StepSound
     clip: {fileID: 8300000, guid: b64b453d6e35a1f49babdd4502d65176, type: 3}
-    volume: 0.6
+    volume: 0.3
     pitch: 1
     randomVolume: 0.2
     randomPitch: 0.1
+    loop: 0
+  - name: VentilationSound
+    clip: {fileID: 8300000, guid: 48d7b77fa7674dc43a20e60befb2f340, type: 3}
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0.2
+    randomPitch: 0.1
+    loop: 0
+  - name: FlashSound
+    clip: {fileID: 8300000, guid: 4fb5a346934ef0447a6b71db1363aba5, type: 3}
+    volume: 0.15
+    pitch: 1.5
+    randomVolume: 0.2
+    randomPitch: 0.3
+    loop: 1
+  - name: SkrimSound
+    clip: {fileID: 8300000, guid: de39f392cd2ddf945b7f060021a6bc56, type: 3}
+    volume: 1
+    pitch: 1.5
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+  - name: PumpingSound
+    clip: {fileID: 8300000, guid: 0629c6b989b7b7d46bd3e2a9b6c574cf, type: 3}
+    volume: 0.871
+    pitch: 0.96
+    randomVolume: 0.2
+    randomPitch: 0.3
     loop: 0

@@ -7,7 +7,14 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
+    GameMaster gameMaster;
     
+    private void Start()
+    {
+        gameMaster = GameMaster.instance;
+        if (gameMaster == null)
+            Debug.LogError("No GameMaster");
+    }
     void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
@@ -36,6 +43,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void ExitGame()
     {
+        gameMaster.SaveGame();
         Debug.Log("Exit");
         Application.Quit();
     }
