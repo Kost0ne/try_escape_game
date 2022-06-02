@@ -12,8 +12,10 @@ public class GameData
     public bool IsWireQuestCompleted;
     public bool IsMouseQuestCompleted;
     public bool IsCardQuestCompleted;
-
+    
     public float[] position;
+
+    public bool IsLoad;
 
     public GameData(GameMaster gameMaster)
     {
@@ -28,9 +30,10 @@ public class GameData
         IsCardQuestCompleted = gameMaster.IsCardQuestCompleted;
 
         position = new float[3];
-        position[0] = gameMaster.transform.position.x;
-        position[1] = gameMaster.transform.position.y;
-        position[2] = gameMaster.transform.position.z;
+        position[0] = gameMaster.position.x;
+        position[1] = gameMaster.position.y;
+        position[2] = gameMaster.position.z;
+        Debug.Log(position[0]);
     }
 
     // private void SetPlayerPosition()

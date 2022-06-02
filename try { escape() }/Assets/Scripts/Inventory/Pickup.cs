@@ -14,20 +14,33 @@ public class Pickup : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         for (var i = 0; i < inventory.slots.Length; i++)
+    //         {
+    //             if (inventory.isFull[i] == false)
+    //             {
+    //                 inventory.isFull[i] = true;
+    //                 Instantiate(slotButton, inventory.slots[i].transform);
+    //                 Destroy(gameObject);
+    //                 break;
+    //             }
+    //         }
+    //     }
+    // }
+
+    private void OnMouseDown()
     {
-        if (other.CompareTag("Player"))
+        CursorManager.Instance.SetActiveCursorType(CursorManager.CursorType.Arrow);
+        for (var i = 0; i < inventory.slots.Length; i++)
         {
-            for (var i = 0; i < inventory.slots.Length; i++)
-            {
-                if (inventory.isFull[i] == false)
-                {
-                    inventory.isFull[i] = true;
-                    Instantiate(slotButton, inventory.slots[i].transform);
-                    Destroy(gameObject);
-                    break;
-                }
-            }
+            if (inventory.isFull[i]) continue;
+            inventory.isFull[i] = true;
+            Instantiate(slotButton, inventory.slots[i].transform);
+            Destroy(gameObject);
+            break;
         }
     }
 }

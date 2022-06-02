@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster instance;
-    public bool HasMount = false;
-    public bool HasCard = false;
-    public bool HasScrewdriver = false;
-    public bool HasFlashlight = false;
-    public bool IsFireQuestCompleted = false;
-    public bool IsWireQuestCompleted = false;
-    public bool IsMouseQuestCompleted = false;
-    public bool IsCardQuestCompleted = false;
+    public bool HasMount;
+    public bool HasCard;
+    public bool HasScrewdriver;
+    public bool HasFlashlight;
+    public bool IsFireQuestCompleted;
+    public bool IsWireQuestCompleted;
+    public bool IsMouseQuestCompleted;
+    public bool IsCardQuestCompleted;
+    public Vector3 position;
+
+    public static bool IsLoad = true;
     
     void Awake()
     {
@@ -20,7 +21,7 @@ public class GameMaster : MonoBehaviour
         {
             if (instance != this)
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
         }
         else
@@ -33,6 +34,7 @@ public class GameMaster : MonoBehaviour
     public void SaveGame()
     {
         SaveSystem.SaveGame(this);
+        IsLoad = false;
     }
 
     public void LoadGame()
@@ -47,11 +49,20 @@ public class GameMaster : MonoBehaviour
         IsWireQuestCompleted = data.IsWireQuestCompleted;
         IsMouseQuestCompleted = data.IsMouseQuestCompleted;
         IsCardQuestCompleted = data.IsCardQuestCompleted;
-        Vector3 position;
-        position.x = data.position[0];
-        position.y = data.position[1];
-        position.z = data.position[2];
-        Debug.Log(position);
-        gameObject.transform.position = position;
+        position = new Vector3(data.position[0], data.position[1], data.position[2]);
+        print(position);
     }
+
+    void Update()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if(player == null) return;
+        if (!IsLoad)
+        {
+            IsLoad = true;
+            player.transform.position = position;
+        }
+        position = player.transform.position;
+    }
+    
 }

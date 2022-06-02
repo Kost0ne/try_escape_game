@@ -51,3 +51,4 @@ MonoBehaviour:
   IsWireQuestCompleted: 0
   IsMouseQuestCompleted: 0
   IsCardQuestCompleted: 0
+  position: {x: 2.25, y: -1.56, z: 0}

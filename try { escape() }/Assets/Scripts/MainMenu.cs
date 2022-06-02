@@ -28,11 +28,13 @@ public class MainMenu : MonoBehaviour
 
    public void StartGame()
    {
+      GameMaster.IsLoad = true;
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
    }
 
    public void Continue()
    {
+      GameMaster.IsLoad = false;
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
       gameMaster.LoadGame();
       // asyncLoad.
